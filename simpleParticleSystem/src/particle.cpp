@@ -11,28 +11,28 @@
 
 Particle::Particle(){
     // Set the initial color
-    color.set( ofRandom(255), ofRandom(255), ofRandom(255));
+    _color.set( ofRandom(255), ofRandom(255), ofRandom(255));
     
     // initial position
-    x = ofRandom (ofGetWindowWidth());
-    y = ofRandom (ofGetWindowHeight());
+    _x = ofRandom (ofGetWindowWidth());
+    _y = ofRandom (ofGetWindowHeight());
 }
 
 void Particle::moveTo(float xDestiny, float yDestiny)
 {
-    x += (xDestiny - x) * 0.5f;
-    y += (yDestiny - y) * 0.5f;
+    _x += (xDestiny - _x) * 0.5f;
+    _y += (yDestiny - _y) * 0.5f;
 }
 
 void Particle::draw()
 {
-    ofSetColor(color);
+    ofSetColor(_color);
     ofFill();
-    ofDrawCircle(x,y,30);
+    ofDrawCircle(_x,_y,30);
 }
 
 void Particle::setPosition(float newX, float newY)
 {
-    x = newX;
-    y = newY;
+    _x = newX;
+    _y = newY;
 }

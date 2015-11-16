@@ -2,24 +2,24 @@
 
 ofApp::ofApp()
 {
-    followerParticles.clear();
+    _VParticles.clear();
     
     for (int i = 0; i < 5; ++i)
     {
         Particle* particle = new Particle();
         
-        followerParticles.push_back(particle);
+        _VParticles.push_back(particle);
     }
 }
 
 ofApp::~ofApp()
 {
-    for (auto p : followerParticles)
+    for (auto p : _VParticles)
     {
         delete p;
     }
     
-    followerParticles.clear();
+    _VParticles.clear();
 }
 
 //--------------------------------------------------------------
@@ -34,11 +34,11 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    theParticle.moveTo(mouseX, mouseY);
+    _particle.moveTo(mouseX, mouseY);
     
-    Particle& previousParticle = theParticle;
+    Particle& previousParticle = _particle;
     
-    for (auto p : followerParticles)
+    for (auto p : _VParticles)
     {
         p->moveTo(previousParticle.getX(), previousParticle.getY());
         previousParticle = *p;
@@ -50,10 +50,10 @@ void ofApp::draw(){
     ofBackgroundGradient(ofColor::gray, ofColor(30,10,30), OF_GRADIENT_CIRCULAR);
     
     // Draw Circle
-    theParticle.draw();
+    _particle.draw();
 
     // Draw Shadow
-    for (auto p : followerParticles)
+    for (auto p : _VParticles)
     {
         p->draw();
     }
@@ -82,7 +82,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    theParticle.setPosition(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()));
+    _particle.setPosition(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()));
 }
 
 //--------------------------------------------------------------

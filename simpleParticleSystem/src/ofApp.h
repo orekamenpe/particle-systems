@@ -25,6 +25,6 @@ class ofApp : public ofBaseApp{
     ofApp();
     ~ofApp();
     
-    Particle theParticle;
-    std::vector<Particle*> followerParticles;
+    Particle _particle;
+    std::vector<Particle*> _VParticles;
 };

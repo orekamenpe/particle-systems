@@ -13,9 +13,9 @@
 
 class Particle {
 private:
-    float x;
-    float y;
-    ofColor color;
+    float _x;
+    float _y;
+    ofColor _color;
     
 public:
     Particle();
@@ -24,8 +24,8 @@ public:
     void draw();
     
     void setPosition(float x, float y);
-    const float getX() const { return x; };
-    const float getY() const { return y; };
+    const float getX() const { return _x; };
+    const float getY() const { return _y; };
 };
 
 #endif /* defined(__simpleParticleSystem__particle__) */
