@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "particle.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,10 +22,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    float xPos;
-    float yPos;
-    
-    float oldXPos;
-    float oldYPos;
-		
+    Particle theParticle;
+    Particle theShadowParticle;
 };
