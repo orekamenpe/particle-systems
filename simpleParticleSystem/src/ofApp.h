@@ -22,6 +22,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    ofApp();
+    ~ofApp();
+    
     Particle theParticle;
-    Particle theShadowParticle;
+    std::vector<Particle*> followerParticles;
 };

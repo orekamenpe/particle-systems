@@ -20,8 +20,8 @@ Particle::Particle(){
 
 void Particle::moveTo(float xDestiny, float yDestiny)
 {
-    x += (xDestiny - x) * 0.1f;
-    y += (yDestiny -y) * 0.1f;
+    x += (xDestiny - x) * 0.5f;
+    y += (yDestiny - y) * 0.5f;
 }
 
 void Particle::draw()
