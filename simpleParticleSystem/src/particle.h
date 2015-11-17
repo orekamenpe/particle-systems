@@ -9,23 +9,38 @@
 #ifndef __simpleParticleSystem__particle__
 #define __simpleParticleSystem__particle__
 
-#include "ofColor.h"
+#include "ofMain.h"
 
 class Particle {
-private:
-    float _x;
-    float _y;
-    ofColor _color;
-    
 public:
     Particle();
+    Particle(ofPoint pos);
+    Particle(ofPoint pos, ofPoint vel, float size, ofTexture* texture);
+    ~Particle();
+    void setup();
     
-    void moveTo(float xDestiny, float yDestiny);
+    void update();
     void draw();
+    bool isOffscreen();
     
-    void setPosition(float x, float y);
-    const float getX() const { return _x; };
-    const float getY() const { return _y; };
+    void setColor(int r, int g, int b);
+    void setColor( ofColor c );
+    
+    ofPoint _pos;
+    ofPoint _vel;
+    
+    float _size;
+    
+    int _age;
+    int _lifetime;
+    bool _dead;
+    
+    ofTexture* _texture;
+    
+    int _colorR;
+    int _colorG;
+    int _colorB;
+    int _opacity;
 };
 
 #endif /* defined(__simpleParticleSystem__particle__) */

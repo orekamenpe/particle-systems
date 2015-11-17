@@ -1,68 +1,64 @@
 #include "ofApp.h"
+#include "particleController.h"
 
 ofApp::ofApp()
 {
-    _VParticles.clear();
-    
-    for (int i = 0; i < 5; ++i)
-    {
-        Particle* particle = new Particle();
-        
-        _VParticles.push_back(particle);
-    }
 }
 
 ofApp::~ofApp()
 {
-    for (auto p : _VParticles)
-    {
-        delete p;
-    }
-    
-    _VParticles.clear();
+    delete _particleController;
 }
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    // Smooth edges
-    ofEnableSmoothing();
+    _fullscreen = false;
+    _mouseDown = false;
     
-    // Fixed framerate
     ofSetFrameRate(30);
+    ofSetVerticalSync(true);
+    ofBackground(ofColor::black);
+    
+    _image.load("circle.png");
+    
+    _particleController = new ParticleController(_image.getTexture(), ofPoint(ofGetWidth() * 0.5f, ofGetHeight() - 10), 3, 10.0f, 20.0f, -90.0f, 20.0f);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    _particle.moveTo(mouseX, mouseY);
-    
-    Particle& previousParticle = _particle;
-    
-    for (auto p : _VParticles)
+    if ( _mouseDown )
     {
-        p->moveTo(previousParticle.getX(), previousParticle.getY());
-        previousParticle = *p;
+        _particleController->_position = _mousePos;
     }
+    _particleController->update();
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackgroundGradient(ofColor::gray, ofColor(30,10,30), OF_GRADIENT_CIRCULAR);
     
-    // Draw Circle
-    _particle.draw();
-
-    // Draw Shadow
-    for (auto p : _VParticles)
-    {
-        p->draw();
-    }
+    _particleController->draw ();
     
+    ofSetColor(0xFF0080);
+    ofDrawBitmapString( "FPS: " + ofToString(ofGetFrameRate() ), 10, 20);
+    ofDrawBitmapString( "Particles: " + ofToString(_particleController->getParticleCount()), 10, 30);
+    ofSetColor(0x0080FF);
+    ofDrawBitmapString("Press/drag mouse to spawn particles", ofGetWidth() - (35*8) - 10, 20);
 }
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key){
+        case 'f':
+        case 'F':
+            _fullscreen = !_fullscreen;
+            ofSetFullscreen(_fullscreen);
+            break;
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------
@@ -72,22 +68,23 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    _mousePos = ofPoint(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    _mousePos = ofPoint(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    _particle.setPosition(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()));
+    _mouseDown = true;
+    _mousePos = ofPoint(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    _mouseDown = false;
 }
 
 //--------------------------------------------------------------

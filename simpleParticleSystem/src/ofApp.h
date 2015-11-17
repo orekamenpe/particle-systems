@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "particle.h"
+
+class ParticleController;
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +26,10 @@ class ofApp : public ofBaseApp{
     ofApp();
     ~ofApp();
     
-    Particle _particle;
-    std::vector<Particle*> _VParticles;
+    ParticleController* _particleController;
+    ofImage _image;
+    
+    bool _fullscreen;
+    bool _mouseDown;
+    ofPoint _mousePos;
 };
