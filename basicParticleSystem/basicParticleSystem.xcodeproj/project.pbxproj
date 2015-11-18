@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C79EF2D51BFA38D900EB1C0F /* ParticleData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C79EF2D31BFA38D900EB1C0F /* ParticleData.cpp */; };
-		C79EF2DC1BFAAF8F00EB1C0F /* ParticleGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C79EF2DA1BFAAF8F00EB1C0F /* ParticleGenerator.cpp */; };
 		C79EF2DF1BFAAFA300EB1C0F /* ParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C79EF2DD1BFAAFA300EB1C0F /* ParticleEmitter.cpp */; };
-		C79EF2E21BFAAFBF00EB1C0F /* ParticleUpdater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C79EF2E01BFAAFBF00EB1C0F /* ParticleUpdater.cpp */; };
 		C79EF2E51BFAAFCD00EB1C0F /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C79EF2E31BFAAFCD00EB1C0F /* ParticleSystem.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
@@ -49,11 +47,9 @@
 /* Begin PBXFileReference section */
 		C79EF2D31BFA38D900EB1C0F /* ParticleData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleData.cpp; sourceTree = "<group>"; };
 		C79EF2D41BFA38D900EB1C0F /* ParticleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleData.h; sourceTree = "<group>"; };
-		C79EF2DA1BFAAF8F00EB1C0F /* ParticleGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleGenerator.cpp; sourceTree = "<group>"; };
 		C79EF2DB1BFAAF8F00EB1C0F /* ParticleGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleGenerator.h; sourceTree = "<group>"; };
 		C79EF2DD1BFAAFA300EB1C0F /* ParticleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitter.cpp; sourceTree = "<group>"; };
 		C79EF2DE1BFAAFA300EB1C0F /* ParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEmitter.h; sourceTree = "<group>"; };
-		C79EF2E01BFAAFBF00EB1C0F /* ParticleUpdater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleUpdater.cpp; sourceTree = "<group>"; };
 		C79EF2E11BFAAFBF00EB1C0F /* ParticleUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleUpdater.h; sourceTree = "<group>"; };
 		C79EF2E31BFAAFCD00EB1C0F /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
 		C79EF2E41BFAAFCD00EB1C0F /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
@@ -122,11 +118,9 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				C79EF2D31BFA38D900EB1C0F /* ParticleData.cpp */,
 				C79EF2D41BFA38D900EB1C0F /* ParticleData.h */,
-				C79EF2DA1BFAAF8F00EB1C0F /* ParticleGenerator.cpp */,
 				C79EF2DB1BFAAF8F00EB1C0F /* ParticleGenerator.h */,
 				C79EF2DD1BFAAFA300EB1C0F /* ParticleEmitter.cpp */,
 				C79EF2DE1BFAAFA300EB1C0F /* ParticleEmitter.h */,
-				C79EF2E01BFAAFBF00EB1C0F /* ParticleUpdater.cpp */,
 				C79EF2E11BFAAFBF00EB1C0F /* ParticleUpdater.h */,
 				C79EF2E31BFAAFCD00EB1C0F /* ParticleSystem.cpp */,
 				C79EF2E41BFAAFCD00EB1C0F /* ParticleSystem.h */,
@@ -231,9 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				C79EF2E21BFAAFBF00EB1C0F /* ParticleUpdater.cpp in Sources */,
 				C79EF2E51BFAAFCD00EB1C0F /* ParticleSystem.cpp in Sources */,
-				C79EF2DC1BFAAF8F00EB1C0F /* ParticleGenerator.cpp in Sources */,
 				C79EF2DF1BFAAFA300EB1C0F /* ParticleEmitter.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				C79EF2D51BFA38D900EB1C0F /* ParticleData.cpp in Sources */,

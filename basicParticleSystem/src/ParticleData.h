@@ -38,6 +38,9 @@ public:
     void kill(size_t id);
     void wake(size_t id);
     void swapData(size_t a, size_t b);
+    
+    static void copyOnlyAlive(const ParticleData *source, ParticleData *destination);
+    static size_t computeMemoryUsage(const ParticleData &p);
 };
 
 #endif /* defined(__basicParticleSystem__ParticleData__) */
