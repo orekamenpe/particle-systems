@@ -26,13 +26,13 @@ void ParticleData::generate(size_t maxSize)
     _count = maxSize;
     _countAlive = 0;
     
-    _position.reset(new ofPoint[maxSize]);
-    _color.reset(new ofPoint[maxSize]);
-    _startColor.reset(new ofPoint[maxSize]);
-    _endColor.reset(new ofPoint[maxSize]);
-    _velocity.reset(new ofPoint[maxSize]);
-    _acceleration.reset(new ofPoint[maxSize]);
-    _time.reset(new ofPoint[maxSize]);
+    _position.reset(new ofVec4f[maxSize]);
+    _color.reset(new ofVec4f[maxSize]);
+    _startColor.reset(new ofVec4f[maxSize]);
+    _endColor.reset(new ofVec4f[maxSize]);
+    _velocity.reset(new ofVec4f[maxSize]);
+    _acceleration.reset(new ofVec4f[maxSize]);
+    _time.reset(new ofVec4f[maxSize]);
     _alive.reset(new bool[maxSize]);
 }
 
@@ -94,5 +94,5 @@ void ParticleData::copyOnlyAlive(const ParticleData *source, ParticleData *desti
 
 size_t ParticleData::computeMemoryUsage(const ParticleData &p)
 {
-    return p._count * (7 * sizeof(ofPoint) + sizeof(bool)) + sizeof(size_t) * 2;
+    return p._count * (7 * sizeof(ofVec4f) + sizeof(bool)) + sizeof(size_t) * 2;
 }

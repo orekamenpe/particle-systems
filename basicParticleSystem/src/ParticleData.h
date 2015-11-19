@@ -9,18 +9,18 @@
 #ifndef __basicParticleSystem__ParticleData__
 #define __basicParticleSystem__ParticleData__
 
-#include "ofPoint.h"
+#include "ofMath.h"
 
 class ParticleData
 {
 public:
-    std::unique_ptr<ofPoint[]> _position;
-    std::unique_ptr<ofPoint[]> _color;
-    std::unique_ptr<ofPoint[]> _startColor;
-    std::unique_ptr<ofPoint[]> _endColor;
-    std::unique_ptr<ofPoint[]> _velocity;
-    std::unique_ptr<ofPoint[]> _acceleration;
-    std::unique_ptr<ofPoint[]> _time;
+    std::unique_ptr<ofVec4f[]> _position;
+    std::unique_ptr<ofVec4f[]> _color;
+    std::unique_ptr<ofVec4f[]> _startColor;
+    std::unique_ptr<ofVec4f[]> _endColor;
+    std::unique_ptr<ofVec4f[]> _velocity;
+    std::unique_ptr<ofVec4f[]> _acceleration;
+    std::unique_ptr<ofVec4f[]> _time;
     std::unique_ptr<bool[]> _alive;
     
     size_t _count {0};
