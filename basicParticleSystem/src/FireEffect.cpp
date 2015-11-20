@@ -85,16 +85,10 @@ void FireEffect::clean()
 {
 }
 
-void FireEffect::update(double dt)
+void FireEffect::update()
 {
-    static double time = 0.0;
-    time += dt;
-}
-
-void FireEffect::cpuUpdate(double dt)
-{
-    _flameSystem->update(dt);
-    _glowSystem->update(dt);
+    _flameSystem->update();
+    _glowSystem->update();
 }
 
 void FireEffect::draw()

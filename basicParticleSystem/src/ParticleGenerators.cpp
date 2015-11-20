@@ -14,7 +14,7 @@ namespace generators
 {
     
 // Position -------------------------------------------
-    void BoxPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void BoxPosGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         ofVec3f posMin{ _pos.x - _maxStartPosOffset.x, _pos.y - _maxStartPosOffset.y, _pos.z - _maxStartPosOffset.z };
         ofVec3f posMax{ _pos.x + _maxStartPosOffset.x, _pos.y + _maxStartPosOffset.y, _pos.z + _maxStartPosOffset.z };
@@ -25,7 +25,7 @@ namespace generators
         }
     }
     
-    void RoundPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void RoundPosGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {
@@ -35,7 +35,7 @@ namespace generators
     }
 
 // Color -------------------------------------------
-    void BasicColorGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void BasicColorGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {
@@ -45,7 +45,7 @@ namespace generators
     }
 
 // Velocity -------------------------------------------
-    void BasicVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void BasicVelGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {
@@ -53,7 +53,7 @@ namespace generators
         }
     }
     
-    void SphereVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void SphereVelGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         float phi, theta, v, r;
         for (size_t i = startId; i < endId; ++i)
@@ -69,7 +69,7 @@ namespace generators
         }
     }
     
-    void VelFromPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void VelFromPosGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {
@@ -80,16 +80,17 @@ namespace generators
     }
 
 // Time -------------------------------------------
-    void BasicTimeGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void BasicTimeGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {
-            p->_time[i] = ofRandom(_minTime, _maxTime);
+            p->_lifeTime[i] = ofRandom(_minTime, _maxTime);
+            p->_life[i] = p->_lifeTime[i];
         }
     }
     
 // Image/Texture -------------------------------------------
-    void BasicImageGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    void BasicImageGen::generate(ParticleData *p, size_t startId, size_t endId)
     {
         for (size_t i = startId; i < endId; ++i)
         {

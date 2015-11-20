@@ -14,6 +14,7 @@
 
 namespace updaters
 {
+    /*
     class EulerUpdater : public ParticleUpdater
     {
     public:
@@ -21,7 +22,7 @@ namespace updaters
     public:
         EulerUpdater() : _globalAcceleration(0.0) { }
         
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
     
     // collision with the floor :) todo: implement a collision model
@@ -33,7 +34,7 @@ namespace updaters
     public:
         FloorUpdater() : _floorY(0.0), _bounceFactor(0.5f) { }
         
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
     
     class AttractorUpdater : public ParticleUpdater
@@ -41,19 +42,21 @@ namespace updaters
     protected:
         std::vector<ofVec3f> _attractors; // .w is force
     public:
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
         
         size_t collectionSize() const { return _attractors.size(); }
         void add(const ofVec3f &attr) { _attractors.push_back(attr); }
         ofVec3f &get(size_t id) { return _attractors[id]; }
     };
+    */
     
     class BasicColorUpdater : public ParticleUpdater
     {
     public:
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
     
+    /*
     class PosColorUpdater : public ParticleUpdater
     {
     public:
@@ -62,7 +65,7 @@ namespace updaters
     public:
         PosColorUpdater() : _minPos(0.0), _maxPos(1.0) { }
         
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
     
     class VelColorUpdater : public ParticleUpdater
@@ -73,13 +76,14 @@ namespace updaters
     public:
         VelColorUpdater() : _minVel(0.0), _maxVel(1.0) { }
         
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
+     */
     
     class BasicTimeUpdater : public ParticleUpdater
     {
     public:
-        virtual void update(double dt, ParticleData *p) override;
+        virtual void update(ParticleData *p) override;
     };
 }
 

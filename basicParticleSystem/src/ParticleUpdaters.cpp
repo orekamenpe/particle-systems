@@ -11,10 +11,10 @@
 
 namespace updaters
 {
-    void EulerUpdater::update(double dt, ParticleData *p)
+    /*
+    void EulerUpdater::update(ParticleData *p)
     {
-        const ofVec3f globalA{ static_cast<float>(dt * _globalAcceleration.x), static_cast<float>(dt * _globalAcceleration.y), static_cast<float>(dt * _globalAcceleration.z)};
-        const float localDT = (float)dt;
+        const ofVec3f globalA{ _globalAcceleration.x, _globalAcceleration.y, _globalAcceleration.z};
         
         ofVec3f * __restrict acc = p->_acceleration.get();
         ofVec3f * __restrict vel = p->_velocity.get();
@@ -25,16 +25,14 @@ namespace updaters
             acc[i] += globalA;
         
         for (size_t i = 0; i < endId; ++i)
-            vel[i] += localDT * acc[i];
+            vel[i] += acc[i];
         
         for (size_t i = 0; i < endId; ++i)
-            pos[i] += localDT * vel[i];
+            pos[i] += vel[i];
     }
     
-    void FloorUpdater::update(double dt, ParticleData *p)
+    void FloorUpdater::update(ParticleData *p)
     {
-        const float localDT = (float)dt;
-        
         ofVec3f * __restrict acc = p->_acceleration.get();
         ofVec3f * __restrict vel = p->_velocity.get();
         ofVec3f * __restrict pos = p->_position.get();
@@ -59,10 +57,8 @@ namespace updaters
         
     }
     
-    void AttractorUpdater::update(double dt, ParticleData *p)
+    void AttractorUpdater::update(ParticleData *p)
     {
-        const float localDT = (float)dt;
-        
         ofVec3f * __restrict acc = p->_acceleration.get();
         ofVec3f * __restrict vel = p->_velocity.get();
         ofVec3f * __restrict pos = p->_position.get();
@@ -81,35 +77,39 @@ namespace updaters
                 off.z = _attractors[a].z - pos[i].z;
                 dist = mathHelper::dotVec3f(off, off);
                 
-                //if (fabs(dist) > 0.00001)
-                //dist = _attractors[a].w / dist;
-                
                 acc[i] += off * dist;
             }
         }
-    }
+    }*/
     
-    void BasicColorUpdater::update(double dt, ParticleData *p)
+    void BasicColorUpdater::update(ParticleData *p)
     {
         ofVec3f * __restrict col = p->_color.get();
         ofVec3f * __restrict startCol = p->_startColor.get();
         ofVec3f * __restrict endCol = p->_endColor.get();
-        ssize_t * __restrict t = p->_time.get();
+        ssize_t * __restrict t = p->_lifeTime.get();
+        size_t * __restrict l = p->_life.get();
+        
+        // TODO: Calculate opacity
         
         const size_t endId = p->_countAlive;
         for (size_t i = 0; i < endId; ++i)
         {
-            col[i] = mathHelper::mixVec3f(startCol[i], endCol[i], t[i]);
+            col[i] = mathHelper::mixVec3f(startCol[i], endCol[i], t[i]/l[i]);
         }
     }
     
-    void PosColorUpdater::update(double dt, ParticleData *p)
+    /*
+    void PosColorUpdater::update(ParticleData *p)
     {
         ofVec3f * __restrict col = p->_color.get();
         ofVec3f * __restrict startCol = p->_startColor.get();
         ofVec3f * __restrict endCol = p->_endColor.get();
-        ssize_t * __restrict t = p->_time.get();
+        ssize_t * __restrict t = p->_lifeTime.get();
+        size_t * __restrict l = p->_life.get();
         ofVec3f * __restrict pos = p->_position.get();
+        
+        // TODO: calculate opacity too
         
         const int endId = (int)p->_countAlive;
         float scaler, scaleg, scaleb;
@@ -129,13 +129,16 @@ namespace updaters
         }
     }
     
-    void VelColorUpdater::update(double dt, ParticleData *p)
+    void VelColorUpdater::update(ParticleData *p)
     {
         ofVec3f * __restrict col = p->_color.get();
         ofVec3f * __restrict startCol = p->_startColor.get();
         ofVec3f * __restrict endCol = p->_endColor.get();
-        ssize_t * __restrict t = p->_time.get();
+        ssize_t * __restrict t = p->_lifeTime.get();
+        size_t * __restrict l = p->_life.get();
         ofVec3f * __restrict vel = p->_velocity.get();
+        
+        // TODO: calculate opacity too
         
         const size_t endId = p->_countAlive;
         float scaler, scaleg, scaleb;
@@ -152,14 +155,13 @@ namespace updaters
             col[i].z = scaleb;// mathHelper::mixf(p->_startColor[i].b, p->_endColor[i].b, scaleb);
             //col[i].w = mathHelper::mixf(startCol[i].w, endCol[i].w, t[i]);
         }
-    }
+    }*/
     
-    void BasicTimeUpdater::update(double dt, ParticleData *p)
+    void BasicTimeUpdater::update(ParticleData *p)
     {
         unsigned int endId = p->_countAlive;
-        const float localDT = (float)dt;
         
-        ssize_t * __restrict t = p->_time.get();
+        ssize_t * __restrict t = p->_lifeTime.get();
         
         if (endId == 0) return;
         

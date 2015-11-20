@@ -22,7 +22,8 @@ public:
     std::unique_ptr<ofVec3f[]> _direction;
     std::unique_ptr<ofVec3f[]> _velocity;
     std::unique_ptr<ofVec3f[]> _acceleration;
-    std::unique_ptr<ssize_t[]> _time;
+    std::unique_ptr<ssize_t[]> _lifeTime;
+    std::unique_ptr<size_t[]> _life;
     std::unique_ptr<bool[]> _alive;
 
     std::unique_ptr<ofVec2f[]> _size;

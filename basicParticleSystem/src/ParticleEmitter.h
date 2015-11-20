@@ -24,7 +24,7 @@ public:
     virtual ~ParticleEmitter() { }
     
     // calls all the generators and at the end it activates (wakes) particle
-    virtual void emit(double dt, ParticleData *p);
+    virtual void emit(ParticleData *p);
     
     void addGenerator(std::shared_ptr<ParticleGenerator> gen) { _generators.push_back(gen); }
 };

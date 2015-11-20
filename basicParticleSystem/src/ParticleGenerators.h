@@ -23,7 +23,7 @@ namespace generators
     public:
         BoxPosGen() : _pos(0.0), _maxStartPosOffset(0.0) { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -41,7 +41,7 @@ namespace generators
         , _radY((float)radY)
         { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -55,7 +55,7 @@ namespace generators
     public:
         BasicColorGen() : _minStartCol(0.0), _maxStartCol(0.0), _minEndCol(0.0), _maxEndCol(0.0) { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -67,7 +67,7 @@ namespace generators
     public:
         BasicVelGen() : _minStartVel(0.0), _maxStartVel(0.0) { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -79,7 +79,7 @@ namespace generators
     public:
         SphereVelGen() : _minVel(0.0), _maxVel(0.0) { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -97,7 +97,7 @@ namespace generators
         , _maxScale((float)maxS)
         { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     //----------------------------------------------------
@@ -109,7 +109,7 @@ namespace generators
     public:
         BasicTimeGen() : _minTime(1), _maxTime(1) { }
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
     };
     
     
@@ -126,7 +126,7 @@ namespace generators
         , _size(ofVec2f(sizeX, sizeY))
         {}
         
-        virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) override;
+        virtual void generate(ParticleData *p, size_t startId, size_t endId) override;
         
     };
 }

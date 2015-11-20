@@ -32,9 +32,7 @@ public:
     void reset();
     void clean();
     
-    void update(double dt);
-    void cpuUpdate(double dt);
-    void gpuUpdate(double dt);
+    void update();
     void draw();
     
     int numAllParticles();

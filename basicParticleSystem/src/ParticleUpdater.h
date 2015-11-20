@@ -18,7 +18,7 @@ public:
     ParticleUpdater() { }
     virtual ~ParticleUpdater() { }
     
-    virtual void update(double dt, ParticleData *p) = 0;
+    virtual void update(ParticleData *p) = 0;
 };
 
 #endif /* defined(__basicParticleSystem__ParticleUpdater__) */

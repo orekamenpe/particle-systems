@@ -14,8 +14,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    fireEffect.update(static_cast<double>(1/30.0));
-    fireEffect.cpuUpdate(static_cast<double>(1/30.0));
+    fireEffect.update();
 }
 
 //--------------------------------------------------------------

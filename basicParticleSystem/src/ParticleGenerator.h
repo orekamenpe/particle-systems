@@ -17,7 +17,7 @@ public:
     ParticleGenerator() { }
     virtual ~ParticleGenerator() { }
     
-    virtual void generate(double dt, ParticleData *p, size_t startId, size_t endId) = 0;
+    virtual void generate(ParticleData *p, size_t startId, size_t endId) = 0;
 };
 
 #endif /* defined(__basicParticleSystem__ParticleGenerator__) */

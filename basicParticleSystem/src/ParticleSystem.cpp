@@ -19,11 +19,11 @@ ParticleSystem::ParticleSystem(size_t maxCount)
         _particles._alive[i] = false;
 }
 
-void ParticleSystem::update(double dt)
+void ParticleSystem::update()
 {
     for (auto & em : _emitters)
     {
-        em->emit(dt, &_particles);
+        em->emit(&_particles);
     }
     
     for (size_t i = 0; i < _count; ++i)
@@ -33,7 +33,7 @@ void ParticleSystem::update(double dt)
     
     for (auto & up : _updaters)
     {
-        up->update(dt, &_particles);
+        up->update(&_particles);
     }
     
     ParticleData::copyOnlyAlive(&_particles, &_aliveParticles);

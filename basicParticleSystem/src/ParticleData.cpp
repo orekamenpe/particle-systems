@@ -34,7 +34,8 @@ void ParticleData::generate(size_t maxSize)
     _direction.reset(new ofVec3f[maxSize]);
     _velocity.reset(new ofVec3f[maxSize]);
     _acceleration.reset(new ofVec3f[maxSize]);
-    _time.reset(new ssize_t[maxSize]);
+    _lifeTime.reset(new ssize_t[maxSize]);
+    _life.reset(new size_t[maxSize]);
     _alive.reset(new bool[maxSize]);
     
     _image.reset(new ofTexture[maxSize]);
@@ -70,7 +71,8 @@ void ParticleData::swapData(size_t a, size_t b)
     std::swap(_direction[a], _direction[b]);
     std::swap(_velocity[a], _velocity[b]);
     std::swap(_acceleration[a], _acceleration[b]);
-    std::swap(_time[a], _time[b]);
+    std::swap(_lifeTime[a], _lifeTime[b]);
+    std::swap(_life[a], _life[b]);
     std::swap(_alive[a], _alive[b]);
 }
 
@@ -90,7 +92,8 @@ void ParticleData::copyOnlyAlive(const ParticleData *source, ParticleData *desti
             destination->_direction[id] = source->_direction[i];
             destination->_velocity[id] = source->_velocity[i];
             destination->_acceleration[id] = source->_acceleration[i];
-            destination->_time[id] = source->_time[i];
+            destination->_lifeTime[id] = source->_lifeTime[i];
+            destination->_life[id] = source->_life[i];
             destination->_alive[id] = true;
             
             destination->_image[id] = source->_image[i];
