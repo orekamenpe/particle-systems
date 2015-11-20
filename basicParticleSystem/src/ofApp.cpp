@@ -3,17 +3,34 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+    ofSetFrameRate(30);
+    ofSetVerticalSync(true);
+    ofBackground(ofColor::black);
+    
+    flameImage.load("particle_fire.png");
+    fireEffect.initialize(0, flameImage.getTexture());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
+    fireEffect.update(static_cast<double>(1/30.0));
+    fireEffect.cpuUpdate(static_cast<double>(1/30.0));
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-}
+    ofEnableAlphaBlending();
+    
+    ofSetColor(255,255,255,127);
+    flameImage.draw(100,100,50,50);
+
+    fireEffect.draw();
+    
+    ofDisableAlphaBlending();
+    
+    }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

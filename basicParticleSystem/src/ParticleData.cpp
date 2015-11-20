@@ -7,6 +7,7 @@
 //
 
 #include "ParticleData.h"
+#include "ofMain.h"
 
 ParticleData::ParticleData()
 {
@@ -26,14 +27,18 @@ void ParticleData::generate(size_t maxSize)
     _count = maxSize;
     _countAlive = 0;
     
-    _position.reset(new ofVec4f[maxSize]);
-    _color.reset(new ofVec4f[maxSize]);
-    _startColor.reset(new ofVec4f[maxSize]);
-    _endColor.reset(new ofVec4f[maxSize]);
-    _velocity.reset(new ofVec4f[maxSize]);
-    _acceleration.reset(new ofVec4f[maxSize]);
-    _time.reset(new ofVec4f[maxSize]);
+    _position.reset(new ofVec3f[maxSize]);
+    _color.reset(new ofVec3f[maxSize]);
+    _startColor.reset(new ofVec3f[maxSize]);
+    _endColor.reset(new ofVec3f[maxSize]);
+    _direction.reset(new ofVec3f[maxSize]);
+    _velocity.reset(new ofVec3f[maxSize]);
+    _acceleration.reset(new ofVec3f[maxSize]);
+    _time.reset(new ssize_t[maxSize]);
     _alive.reset(new bool[maxSize]);
+    
+    _image.reset(new ofTexture[maxSize]);
+    _size.reset(new ofVec2f[maxSize]);
 }
 
 void ParticleData::kill(size_t id)
@@ -61,7 +66,8 @@ void ParticleData::swapData(size_t a, size_t b)
     std::swap(_position[a], _position[b]);
     std::swap(_color[a], _color[b]);
     std::swap(_startColor[a], _startColor[b]);
-    std::swap(_endColor[a], _startColor[b]);
+    std::swap(_endColor[a], _endColor[b]);
+    std::swap(_direction[a], _direction[b]);
     std::swap(_velocity[a], _velocity[b]);
     std::swap(_acceleration[a], _acceleration[b]);
     std::swap(_time[a], _time[b]);
@@ -75,16 +81,20 @@ void ParticleData::copyOnlyAlive(const ParticleData *source, ParticleData *desti
     size_t id = 0;
     for (size_t i = 0; i < source->_countAlive; ++i)
     {
-        //if (source->_alive[i])
+        if (source->_alive[i])
         {
             destination->_position[id] = source->_position[i];
             destination->_color[id] = source->_color[i];
             destination->_startColor[id] = source->_startColor[i];
             destination->_endColor[id] = source->_endColor[i];
+            destination->_direction[id] = source->_direction[i];
             destination->_velocity[id] = source->_velocity[i];
             destination->_acceleration[id] = source->_acceleration[i];
             destination->_time[id] = source->_time[i];
             destination->_alive[id] = true;
+            
+            destination->_image[id] = source->_image[i];
+            destination->_size[id] = source->_size[i];
             id++;
         }
     }
@@ -94,5 +104,11 @@ void ParticleData::copyOnlyAlive(const ParticleData *source, ParticleData *desti
 
 size_t ParticleData::computeMemoryUsage(const ParticleData &p)
 {
-    return p._count * (7 * sizeof(ofVec4f) + sizeof(bool)) + sizeof(size_t) * 2;
+    return p._count * (7 * sizeof(ofVec3f) + sizeof(bool)) + sizeof(size_t) * 2;
+}
+
+void ParticleData::draw(size_t id)
+{
+    ofSetColor(_color[id].x, _color[id].y, _color[id].z, 255);
+    _image[id].draw(_position[id].x, _position[id].y, _size[id].x, _size[id].y);
 }

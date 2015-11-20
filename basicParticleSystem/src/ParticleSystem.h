@@ -40,7 +40,10 @@ public:
     void addEmitter(std::shared_ptr<ParticleEmitter> em) { _emitters.push_back(em); }
     void addUpdater(std::shared_ptr<ParticleUpdater> up) { _updaters.push_back(up); }
     
-    ParticleData *finalData() { return &_particles; }
+    // TODO: move this outside of this class
+    void draw();
+    
+    ParticleData* finalData() { return &_particles; }
     
     static size_t computeMemoryUsage(const ParticleSystem &p);
 };

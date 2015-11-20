@@ -10,7 +10,7 @@
 
 void ParticleEmitter::emit(double dt, ParticleData *p)
 {
-    const size_t maxNewParticles = static_cast<size_t>(dt*_emitRate);
+    const size_t maxNewParticles = static_cast<size_t>(_emitRate);
     const size_t startId = p->_countAlive;
     const size_t endId = std::min(startId + maxNewParticles, p->_count-1);
     

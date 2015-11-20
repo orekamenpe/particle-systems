@@ -10,18 +10,23 @@
 #define __basicParticleSystem__ParticleData__
 
 #include "ofMath.h"
+#include "ofTexture.h"
 
 class ParticleData
 {
 public:
-    std::unique_ptr<ofVec4f[]> _position;
-    std::unique_ptr<ofVec4f[]> _color;
-    std::unique_ptr<ofVec4f[]> _startColor;
-    std::unique_ptr<ofVec4f[]> _endColor;
-    std::unique_ptr<ofVec4f[]> _velocity;
-    std::unique_ptr<ofVec4f[]> _acceleration;
-    std::unique_ptr<ofVec4f[]> _time;
+    std::unique_ptr<ofVec3f[]> _position;
+    std::unique_ptr<ofVec3f[]> _color;
+    std::unique_ptr<ofVec3f[]> _startColor;
+    std::unique_ptr<ofVec3f[]> _endColor;
+    std::unique_ptr<ofVec3f[]> _direction;
+    std::unique_ptr<ofVec3f[]> _velocity;
+    std::unique_ptr<ofVec3f[]> _acceleration;
+    std::unique_ptr<ssize_t[]> _time;
     std::unique_ptr<bool[]> _alive;
+
+    std::unique_ptr<ofVec2f[]> _size;
+    std::unique_ptr<ofTexture[]> _image;
     
     size_t _count {0};
     size_t _countAlive {0};
@@ -41,6 +46,8 @@ public:
     
     static void copyOnlyAlive(const ParticleData *source, ParticleData *destination);
     static size_t computeMemoryUsage(const ParticleData &p);
+    
+    void draw(size_t id);
 };
 
 #endif /* defined(__basicParticleSystem__ParticleData__) */

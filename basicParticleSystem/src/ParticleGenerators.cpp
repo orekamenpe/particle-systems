@@ -10,75 +10,91 @@
 #include "ofMath.h"
 #include "mathHelper.h"
 
-void BoxPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+namespace generators
 {
-    ofVec4f posMin{ _pos.x - _maxStartPosOffset.x, _pos.y - _maxStartPosOffset.y, _pos.z - _maxStartPosOffset.z, 1.0 };
-    ofVec4f posMax{ _pos.x + _maxStartPosOffset.x, _pos.y + _maxStartPosOffset.y, _pos.z + _maxStartPosOffset.z, 1.0 };
     
-    for (size_t i = startId; i < endId; ++i)
+// Position -------------------------------------------
+    void BoxPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
     {
-        p->_position[i] = mathHelper::linearRandVec4(posMin, posMax);
-    }
-}
-
-void RoundPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    for (size_t i = startId; i < endId; ++i)
-    {
-        double ang = ofRandom(0.0, M_PI*2.0);
-        p->_position[i] = _center + ofVec4f(_radX*sin(ang), _radY*cos(ang), 0.0, 1.0);
-    }
-}
-
-void BasicColorGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    for (size_t i = startId; i < endId; ++i)
-    {
-        p->_startColor[i] = mathHelper::linearRandVec4(_minStartCol, _maxStartCol);
-        p->_endColor[i] = mathHelper::linearRandVec4(_minEndCol, _maxEndCol);
-    }
-}
-
-void BasicVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    for (size_t i = startId; i < endId; ++i)
-    {
-        p->_velocity[i] = mathHelper::linearRandVec4(_minStartVel, _maxStartVel);
-    }
-}
-
-void SphereVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    float phi, theta, v, r;
-    for (size_t i = startId; i < endId; ++i)
-    {
-        phi = ofRandom(-M_PI, M_PI);
-        theta = ofRandom(-M_PI, M_PI);
-        v = ofRandom(_minVel, _maxVel);
+        ofVec3f posMin{ _pos.x - _maxStartPosOffset.x, _pos.y - _maxStartPosOffset.y, _pos.z - _maxStartPosOffset.z };
+        ofVec3f posMax{ _pos.x + _maxStartPosOffset.x, _pos.y + _maxStartPosOffset.y, _pos.z + _maxStartPosOffset.z };
         
-        r = v*sinf(phi);
-        p->_velocity[i].z = v*cosf(phi);
-        p->_velocity[i].x = r*cosf(theta);
-        p->_velocity[i].y = r*sinf(theta);
+        for (size_t i = startId; i < endId; ++i)
+        {
+            p->_position[i] = mathHelper::linearRandVec4(posMin, posMax);
+        }
     }
-}
-
-void VelFromPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    for (size_t i = startId; i < endId; ++i)
+    
+    void RoundPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
     {
-        float scale = static_cast<float>(ofRandom(_minScale, _maxScale));
-        ofVec4f vel = (p->_position[i] - _offset);
-        p->_velocity[i] = scale * vel;
+        for (size_t i = startId; i < endId; ++i)
+        {
+            double ang = ofRandom(0.0, M_PI*2.0);
+            p->_position[i] = _center + ofVec3f(_radX*sin(ang), _radY*cos(ang), 0.0);
+        }
     }
-}
 
-void BasicTimeGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
-{
-    for (size_t i = startId; i < endId; ++i)
+// Color -------------------------------------------
+    void BasicColorGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
     {
-        p->_time[i].x = p->_time[i].y = ofRandom(_minTime, _maxTime);
-        p->_time[i].z = (float)0.0;
-        p->_time[i].w = (float)1.0 / p->_time[i].x;
+        for (size_t i = startId; i < endId; ++i)
+        {
+            p->_startColor[i] = mathHelper::linearRandVec4(_minStartCol, _maxStartCol);
+            p->_endColor[i] = mathHelper::linearRandVec4(_minEndCol, _maxEndCol);
+        }
+    }
+
+// Velocity -------------------------------------------
+    void BasicVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    {
+        for (size_t i = startId; i < endId; ++i)
+        {
+            p->_velocity[i] = mathHelper::linearRandVec4(_minStartVel, _maxStartVel);
+        }
+    }
+    
+    void SphereVelGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    {
+        float phi, theta, v, r;
+        for (size_t i = startId; i < endId; ++i)
+        {
+            phi = ofRandom(-M_PI, M_PI);
+            theta = ofRandom(-M_PI, M_PI);
+            v = ofRandom(_minVel, _maxVel);
+            
+            r = v*sinf(phi);
+            p->_velocity[i].z = v*cosf(phi);
+            p->_velocity[i].x = r*cosf(theta);
+            p->_velocity[i].y = r*sinf(theta);
+        }
+    }
+    
+    void VelFromPosGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    {
+        for (size_t i = startId; i < endId; ++i)
+        {
+            float scale = static_cast<float>(ofRandom(_minScale, _maxScale));
+            ofVec3f vel = (p->_position[i] - _offset);
+            p->_velocity[i] = scale * vel;
+        }
+    }
+
+// Time -------------------------------------------
+    void BasicTimeGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    {
+        for (size_t i = startId; i < endId; ++i)
+        {
+            p->_time[i] = ofRandom(_minTime, _maxTime);
+        }
+    }
+    
+// Image/Texture -------------------------------------------
+    void BasicImageGen::generate(double dt, ParticleData *p, size_t startId, size_t endId)
+    {
+        for (size_t i = startId; i < endId; ++i)
+        {
+            p->_image[i] = _image;
+            p->_size[i] = _size;
+        }
     }
 }

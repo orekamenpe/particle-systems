@@ -12,16 +12,16 @@
 #include "ofMath.h"
 
 namespace mathHelper{
-    static ofVec4f linearRandVec4(const ofVec4f& min, const ofVec4f& max)
+    static ofVec3f linearRandVec4(const ofVec3f& min, const ofVec3f& max)
     {
         float x = min.x + sqrt(rand())*(max.x - min.x);
         float y = min.y + sqrt(rand())*(max.y - min.y);
         float z = min.z + sqrt(rand())*(max.z - min.z);
         
-        return ofVec4f(x,y,z,1);
+        return ofVec3f(x,y,z);
     }
     
-    static float dotVec4f(const ofVec4f& a, const ofVec4f& b)
+    static float dotVec3f(const ofVec3f& a, const ofVec3f& b)
     {
         return a.dot(b);
     }
@@ -31,7 +31,7 @@ namespace mathHelper{
         return x * (1.0 - a) + y * a;
     }
     
-    static ofVec4f mixVec4f(const ofVec4f& a, const ofVec4f& b, float m)
+    static ofVec3f mixVec3f(const ofVec3f& a, const ofVec3f& b, float m)
     {
         return a * (1.0 - m) + b * m;
     }

@@ -7,7 +7,7 @@
 //
 
 #include "ParticleSystem.h"
-#include "ofPoint.h"
+#include "ofMain.h"
 
 ParticleSystem::ParticleSystem(size_t maxCount)
 {
@@ -36,7 +36,7 @@ void ParticleSystem::update(double dt)
         up->update(dt, &_particles);
     }
     
-    //ParticleData::copyOnlyAlive(&_particles, &_aliveParticles);
+    ParticleData::copyOnlyAlive(&_particles, &_aliveParticles);
 }
 
 void ParticleSystem::reset()
@@ -47,4 +47,12 @@ void ParticleSystem::reset()
 size_t ParticleSystem::computeMemoryUsage(const ParticleSystem &p)
 {
     return 2 * ParticleData::computeMemoryUsage(p._particles);
+}
+
+void ParticleSystem::draw()
+{
+    for (size_t i = 0; i < _aliveParticles._countAlive; ++i)
+    {
+        _aliveParticles.draw(i);
+    }
 }
