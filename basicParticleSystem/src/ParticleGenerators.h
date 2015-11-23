@@ -64,6 +64,10 @@ namespace generators
     public:
         ofVec3f _minStartVel;
         ofVec3f _maxStartVel;
+        
+        float _direction;
+        float _directionDev;
+        
     public:
         BasicVelGen() : _minStartVel(0.0), _maxStartVel(0.0) { }
         
@@ -117,13 +121,19 @@ namespace generators
     class BasicImageGen : public ParticleGenerator
     {
     public:
-        ofTexture _image;
-        ofVec2f _size;
+        ofImage _image;
+        ofVec2f _startSize;
+        ofVec2f _endSize;
+        size_t _startOpacity;
+        size_t _endOpacity;
     public:
-        BasicImageGen() : _size(0.0f) {}
-        BasicImageGen(const ofTexture& image, float sizeX, float sizeY)
+        BasicImageGen() : _startSize(0.0f), _endSize(0.0f) {}
+        BasicImageGen(const ofImage& image, const ofVec2f& startSize, const ofVec2f& endSize, size_t startOpacity, size_t endOpacity)
         : _image(image)
-        , _size(ofVec2f(sizeX, sizeY))
+        , _startSize(startSize)
+        , _endSize(endSize)
+        , _startOpacity(startOpacity)
+        , _endOpacity(endOpacity)
         {}
         
         virtual void generate(ParticleData *p, size_t startId, size_t endId) override;

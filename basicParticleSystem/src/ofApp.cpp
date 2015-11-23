@@ -7,8 +7,12 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(ofColor::black);
     
-    flameImage.load("particle_fire.png");
-    fireEffect.initialize(0, flameImage.getTexture());
+    glowImage.load("particle_fire.png");
+    flame1Image.load("flame01.png");
+    flame2Image.load("flame02.png");
+    flame3Image.load("flame03.png");
+    emberImage.load("spot.png");
+    fireEffect.initialize(0, glowImage, flame1Image, flame2Image, flame3Image, emberImage);
 }
 
 //--------------------------------------------------------------
@@ -20,16 +24,13 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    ofEnableAlphaBlending();
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    ofSetColor(255,255,255,127);
-    flameImage.draw(100,100,50,50);
-
     fireEffect.draw();
-    
-    ofDisableAlphaBlending();
-    
-    }
+
+    glDisable(GL_BLEND);
+}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

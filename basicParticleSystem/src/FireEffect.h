@@ -27,7 +27,7 @@ public:
     FireEffect() { }
     ~FireEffect() { }
     
-    bool initialize(size_t numParticles, ofTexture flameImage);
+    bool initialize(size_t numParticles, ofImage glowImage, ofImage flame1Image, ofImage flame2Image, ofImage flame3Image, ofImage emberImage);
     bool initializeRenderer();
     void reset();
     void clean();

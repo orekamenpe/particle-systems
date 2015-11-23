@@ -11,6 +11,20 @@
 
 namespace updaters
 {
+    void BasicMoveUpdater::update(ParticleData *p)
+    {
+        ofVec3f * __restrict pos = p->_position.get();
+        ofVec3f * __restrict vel = p->_velocity.get();
+        
+        const unsigned int endId = p->_countAlive;
+        
+        for (size_t i = 0; i < endId; ++i)
+        {
+            pos[i].x += vel[i].x;
+            pos[i].y += vel[i].y;
+            pos[i].z += vel[i].z;
+        }
+    }
     /*
     void EulerUpdater::update(ParticleData *p)
     {
@@ -90,12 +104,43 @@ namespace updaters
         ssize_t * __restrict t = p->_lifeTime.get();
         size_t * __restrict l = p->_life.get();
         
-        // TODO: Calculate opacity
+        const size_t endId = p->_countAlive;
+        for (size_t i = 0; i < endId; ++i)
+        {
+            col[i] = mathHelper::interpolateVec3f(startCol[i], endCol[i], l[i] - t[i], l[i]);
+        }
+    }
+    
+    void BasicOpacityUpdater::update(ParticleData *p)
+    {
+        size_t * __restrict opa = p->_opacity.get();
+        size_t * __restrict startOpa = p->_startOpacity.get();
+        size_t * __restrict endOpa = p->_endOpacity.get();
+        
+        ssize_t * __restrict t = p->_lifeTime.get();
+        size_t * __restrict l = p->_life.get();
         
         const size_t endId = p->_countAlive;
         for (size_t i = 0; i < endId; ++i)
         {
-            col[i] = mathHelper::mixVec3f(startCol[i], endCol[i], t[i]/l[i]);
+            opa[i] = mathHelper::interpolatef(startOpa[i], endOpa[i], l[i] - t[i], l[i]);
+        }
+    }
+    
+    void BasicSizeUpdater::update(ParticleData *p)
+    {
+        ofVec2f * __restrict size = p->_size.get();
+        ofVec2f * __restrict startSize = p->_startSize.get();
+        ofVec2f * __restrict endSize = p->_endSize.get();
+        
+        ssize_t * __restrict t = p->_lifeTime.get();
+        size_t * __restrict l = p->_life.get();
+        
+        const size_t endId = p->_countAlive;
+        for (size_t i = 0; i < endId; ++i)
+        {
+            size[i].x = mathHelper::interpolatef(startSize[i].x, endSize[i].x, l[i] - t[i], l[i]);
+            size[i].y = mathHelper::interpolatef(startSize[i].y, endSize[i].y, l[i] - t[i], l[i]);
         }
     }
     

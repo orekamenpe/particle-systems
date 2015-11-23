@@ -10,7 +10,7 @@
 #define __basicParticleSystem__ParticleData__
 
 #include "ofMath.h"
-#include "ofTexture.h"
+#include "ofImage.h"
 
 class ParticleData
 {
@@ -24,10 +24,15 @@ public:
     std::unique_ptr<ofVec3f[]> _acceleration;
     std::unique_ptr<ssize_t[]> _lifeTime;
     std::unique_ptr<size_t[]> _life;
+    std::unique_ptr<size_t[]> _opacity;
+    std::unique_ptr<size_t[]> _startOpacity;
+    std::unique_ptr<size_t[]> _endOpacity;
+    std::unique_ptr<ofVec2f[]> _size;
+    std::unique_ptr<ofVec2f[]> _startSize;
+    std::unique_ptr<ofVec2f[]> _endSize;
     std::unique_ptr<bool[]> _alive;
 
-    std::unique_ptr<ofVec2f[]> _size;
-    std::unique_ptr<ofTexture[]> _image;
+    std::unique_ptr<ofImage[]> _image;
     
     size_t _count {0};
     size_t _countAlive {0};

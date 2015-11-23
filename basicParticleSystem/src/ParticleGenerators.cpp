@@ -7,6 +7,7 @@
 //
 
 #include "ParticleGenerators.h"
+#include "ofMain.h"
 #include "ofMath.h"
 #include "mathHelper.h"
 
@@ -21,7 +22,7 @@ namespace generators
         
         for (size_t i = startId; i < endId; ++i)
         {
-            p->_position[i] = mathHelper::linearRandVec4(posMin, posMax);
+            p->_position[i] = mathHelper::linearRandVec3(posMin, posMax);
         }
     }
     
@@ -39,8 +40,9 @@ namespace generators
     {
         for (size_t i = startId; i < endId; ++i)
         {
-            p->_startColor[i] = mathHelper::linearRandVec4(_minStartCol, _maxStartCol);
-            p->_endColor[i] = mathHelper::linearRandVec4(_minEndCol, _maxEndCol);
+            p->_startColor[i] = mathHelper::linearRandVec3(_minStartCol, _maxStartCol);
+            p->_endColor[i] = mathHelper::linearRandVec3(_minEndCol, _maxEndCol);
+            p->_color[i] = p->_startColor[i];
         }
     }
 
@@ -49,7 +51,9 @@ namespace generators
     {
         for (size_t i = startId; i < endId; ++i)
         {
-            p->_velocity[i] = mathHelper::linearRandVec4(_minStartVel, _maxStartVel);
+            ofVec2f vel = ofVec2f(_minStartVel.x, 0.0f);
+            vel.rotate(ofRandom(_direction - _directionDev, _direction + _directionDev));
+            p->_velocity[i] = ofVec3f(vel.x, vel.y, 0.0f);
         }
     }
     
@@ -95,7 +99,12 @@ namespace generators
         for (size_t i = startId; i < endId; ++i)
         {
             p->_image[i] = _image;
-            p->_size[i] = _size;
+            p->_size[i] = _startSize;
+            p->_startSize[i] = _startSize;
+            p->_endSize[i] = _endSize;
+            p->_opacity[i] = _startOpacity;
+            p->_startOpacity[i] = _startOpacity;
+            p->_endOpacity[i] = _endOpacity;
         }
     }
 }

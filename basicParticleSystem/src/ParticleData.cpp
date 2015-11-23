@@ -36,9 +36,15 @@ void ParticleData::generate(size_t maxSize)
     _acceleration.reset(new ofVec3f[maxSize]);
     _lifeTime.reset(new ssize_t[maxSize]);
     _life.reset(new size_t[maxSize]);
+    _opacity.reset(new size_t[maxSize]);
+    _startOpacity.reset(new size_t[maxSize]);
+    _endOpacity.reset(new size_t[maxSize]);
+    _size.reset(new ofVec2f[maxSize]);
+    _startSize.reset(new ofVec2f[maxSize]);
+    _endSize.reset(new ofVec2f[maxSize]);
     _alive.reset(new bool[maxSize]);
     
-    _image.reset(new ofTexture[maxSize]);
+    _image.reset(new ofImage[maxSize]);
     _size.reset(new ofVec2f[maxSize]);
 }
 
@@ -73,6 +79,12 @@ void ParticleData::swapData(size_t a, size_t b)
     std::swap(_acceleration[a], _acceleration[b]);
     std::swap(_lifeTime[a], _lifeTime[b]);
     std::swap(_life[a], _life[b]);
+    std::swap(_opacity[a], _opacity[b]);
+    std::swap(_startOpacity[a], _startOpacity[b]);
+    std::swap(_endOpacity[a], _endOpacity[b]);
+    std::swap(_size[a], _size[b]);
+    std::swap(_startSize[a], _startSize[b]);
+    std::swap(_endSize[a], _endSize[b]);
     std::swap(_alive[a], _alive[b]);
 }
 
@@ -94,6 +106,12 @@ void ParticleData::copyOnlyAlive(const ParticleData *source, ParticleData *desti
             destination->_acceleration[id] = source->_acceleration[i];
             destination->_lifeTime[id] = source->_lifeTime[i];
             destination->_life[id] = source->_life[i];
+            destination->_opacity[id] = source->_opacity[i];
+            destination->_startOpacity[id] = source->_startOpacity[i];
+            destination->_endOpacity[id] = source->_endOpacity[i];
+            destination->_size[id] = source->_size[i];
+            destination->_startSize[id] = source->_startSize[i];
+            destination->_endSize[id] = source->_endSize[i];
             destination->_alive[id] = true;
             
             destination->_image[id] = source->_image[i];
@@ -112,6 +130,7 @@ size_t ParticleData::computeMemoryUsage(const ParticleData &p)
 
 void ParticleData::draw(size_t id)
 {
-    ofSetColor(_color[id].x, _color[id].y, _color[id].z, 255);
-    _image[id].draw(_position[id].x, _position[id].y, _size[id].x, _size[id].y);
+    ofSetColor(_color[id].x, _color[id].y, _color[id].z, _opacity[id]);
+    
+    _image[id].draw(_position[id].x - _size[id].x * 0.5f, _position[id].y, _size[id].x, _size[id].y);
 }

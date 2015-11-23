@@ -14,6 +14,11 @@
 
 namespace updaters
 {
+    class BasicMoveUpdater : public ParticleUpdater
+    {
+        virtual void update(ParticleData *p) override;
+    };
+    
     /*
     class EulerUpdater : public ParticleUpdater
     {
@@ -51,6 +56,18 @@ namespace updaters
     */
     
     class BasicColorUpdater : public ParticleUpdater
+    {
+    public:
+        virtual void update(ParticleData *p) override;
+    };
+    
+    class BasicOpacityUpdater : public ParticleUpdater
+    {
+    public:
+        virtual void update(ParticleData *p) override;
+    };
+    
+    class BasicSizeUpdater : public ParticleUpdater
     {
     public:
         virtual void update(ParticleData *p) override;

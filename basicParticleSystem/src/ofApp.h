@@ -22,7 +22,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofImage flameImage;
+    ofImage glowImage;
+    ofImage flame1Image;
+    ofImage flame2Image;
+    ofImage flame3Image;
+    ofImage emberImage;
+    
     FireEffect fireEffect;
 		
 };
